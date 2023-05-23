@@ -1,14 +1,14 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import type {App} from 'vue'
+import {createRouter, createWebHistory, type RouteRecordRaw} from 'vue-router'
+import {basicRoutes} from './routes'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: () => import('../App.vue')
-    },
-  ]
+  routes: basicRoutes as unknown as RouteRecordRaw[],
+  strict: true,
+  scrollBehavior: () => ({left: 0, top: 0})
 })
 
-export default router
+export function setupRouter(app: App<Element>) {
+  app.use(router)
+}

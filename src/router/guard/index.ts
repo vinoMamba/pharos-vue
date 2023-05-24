@@ -6,8 +6,6 @@ export function setupRouterGurad(router: Router) {
 
 function createGurad(router: Router) {
   router.beforeEach((to, from, next) => {
-    console.log(to);
-    console.log(from);
     next()
   })
 }

@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import {Button} from "ant-design-vue"
+import {RouterView} from 'vue-router'
+import {AppProvider} from '/@/components/AppProvider'
 </script>
 
 <template>
-  HelloWorld
-  <Button type="primary">ok</Button>
+  <AppProvider>
+    <RouterView />
+  </AppProvider>
 </template>
 
 <style scoped>

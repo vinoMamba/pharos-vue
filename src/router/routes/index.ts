@@ -1,10 +1,19 @@
 import type {AppRouteRecordRaw} from "../types";
 
+
 export const RootRoute: AppRouteRecordRaw = {
   path: "/",
   name: "Root",
   meta: {},
-  component: () => (import('../../App.vue'))
+  redirect: "/login",
+}
+
+export const LoginRoute: AppRouteRecordRaw = {
+  path: "/login",
+  name: "Login",
+  meta: {},
+  // vue 里面加载 .tsx 文件的时候需要加上 .then(res => res.xxx) 这样的写法
+  component: () => import("/@/views/sys/login/loginPage.tsx").then(res => res.LoginPage),
 }
 
 const routerModuleList: AppRouteRecordRaw[] = []
@@ -22,6 +31,7 @@ export const asyncRoutes = [...routerModuleList]
 
 
 export const basicRoutes = [
-  RootRoute
+  RootRoute,
+  LoginRoute
 ]
 

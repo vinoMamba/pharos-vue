@@ -1,4 +1,4 @@
-import type {AxiosTransform} from "./axiosTransform";
+import type {AxiosOptons, AxiosTransform} from "./axiosTransform";
 import {HttpClient} from "./httpClient";
 import {ContentType, RequestMethod} from "/@/enums/http";
 
@@ -20,15 +20,19 @@ const transform: AxiosTransform = {
     console.log(res);
     console.log(options);
   },
+  /*
+  * 请求之前的拦截器
+  */
   requestInterceptors: (config, options) => {
     const timestamp = Date.now()
     const expire = 11000 //过期时间
     if (timestamp > expire) {
       //TODO:refreshToken
     }
-    const token = 'token'  // getToken()
-    if (token) {
-      //TODO: set token to headers
+    //TODO: getToken()
+    const token = 'token'
+    if (token && (config as AxiosOptons).requestOptions?.withToken !== false) {
+      config.headers.Authorization = `${options.authenticationScheme} ${token}`
     }
     return config
   },

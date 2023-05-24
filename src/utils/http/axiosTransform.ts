@@ -1,4 +1,4 @@
-import type {AxiosRequestConfig, AxiosResponse} from "axios";
+import type {AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig} from "axios";
 import type {RequestOptions, Result} from "/#/axios"
 
 export interface AxiosOptons extends AxiosRequestConfig {
@@ -24,7 +24,7 @@ export abstract class AxiosTransform {
   /*
    * 请求拦截器
   */
-  requestInterceptors?: (config: AxiosRequestConfig, options: AxiosOptons) => AxiosRequestConfig
+  requestInterceptors?: (config: InternalAxiosRequestConfig, options: AxiosOptons) => InternalAxiosRequestConfig
   /*
    * 响应拦截器
   */

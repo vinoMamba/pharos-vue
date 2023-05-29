@@ -14,6 +14,9 @@ export default defineConfig((configEnv: ConfigEnv) => {
   // 为了给 env 添加类型
   const wrapEnv = wrapperEnv(env)
   return {
+    server: {
+      port: 3000
+    },
     plugins: [vue(), vueJsx(), htmlPlugin(wrapEnv)],
     resolve: {
       alias: [

@@ -1,6 +1,11 @@
 import {env} from 'dingtalk-jsapi'
 
-export function isInDingtalk() {
+function isInDingtalk() {
   return env.platform !== 'notInDingTalk'
 }
 
+
+
+export {
+  isInDingtalk,
+}

@@ -11,8 +11,13 @@ export const AppProvider = defineComponent({
 
     function getCorpIdFromUrl() {
       const hash = window.location.hash
-      const params = new URLSearchParams(hash.substring(2))
-      return params.get('corpId') || ''
+      const paramStr = hash.split('?')[1]
+      if (paramStr) {
+        const params = new URLSearchParams(paramStr)
+        return params.get('corpId') || ''
+      } else {
+        return ''
+      }
     }
 
     onMounted(() => {

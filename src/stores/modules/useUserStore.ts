@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import {ref} from "vue";
+import {dingtalkLogin} from "/@/api/login";
 
 export const useUserInfoStore = defineStore('userInfo', () => {
   const corpId = ref('')
@@ -8,9 +9,10 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     corpId.value = newId
   }
 
-  const setupLogin = (authCode: string) => {
-    //TODO login api 
-    console.log(authCode);
+  const setupLogin = async (authCode: string) => {
+    const data = await dingtalkLogin(authCode)
+    console.log('-------------');
+    console.log(data);
     return userInfo
   }
 

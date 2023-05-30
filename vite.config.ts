@@ -7,6 +7,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import {loadEnv} from 'vite'
 import {htmlPlugin} from './plugins/html'
 import {wrapperEnv} from './plugins/wrapperEnv'
+import {createProxy} from './plugins/proxy'
 
 // https://vitejs.dev/config/
 export default defineConfig((configEnv: ConfigEnv) => {
@@ -15,7 +16,9 @@ export default defineConfig((configEnv: ConfigEnv) => {
   const wrapEnv = wrapperEnv(env)
   return {
     server: {
-      port: 3000
+      port: 3000,
+      host: true,
+      proxy: createProxy(wrapEnv.VITE_PROXY),
     },
     plugins: [vue(), vueJsx(), htmlPlugin(wrapEnv)],
     resolve: {

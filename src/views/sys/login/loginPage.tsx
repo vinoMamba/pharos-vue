@@ -13,23 +13,18 @@ export const LoginPage = defineComponent({
     const {message} = useMessage()
     const userInfoStore = useUserInfoStore()
     const isLoading = ref(true)
-    onMounted(() => {
-      if (isInDingtalk()) {
-        ready(async function () {
-          try {
-            const {code} = await runtime.permission.requestAuthCode({corpId: userInfoStore.corpId})
-            const userInfo = userInfoStore.setupLogin(code)
-            if (userInfo) {
-              //TODO
-            } else {
-              //TODO
-            }
-          } catch (error) {
-            console.log(error);
-          }
-        })
-      } else {
-        message.error('请在钉钉环境中打开')
+    onMounted(async () => {
+      try {
+        const code = "test"
+        // const {code} = await runtime.permission.requestAuthCode({corpId: userInfoStore.corpId})
+        const userInfo = await userInfoStore.setupLogin(code)
+        if (userInfo) {
+          //TODO
+        } else {
+          //TODO
+        }
+      } catch (error) {
+        console.log(error);
       }
     })
     return () => (

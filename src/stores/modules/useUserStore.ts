@@ -11,8 +11,8 @@ export const useUserInfoStore = defineStore('userInfo', () => {
 
   const setupLogin = async (authCode: string) => {
     const data = await dingtalkLogin(authCode)
-    console.log('-------------');
-    console.log(data);
+    console.log(data.tokenInfo);
+    console.log(data.userInfo);
     return userInfo
   }
 

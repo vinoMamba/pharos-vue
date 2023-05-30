@@ -2,6 +2,9 @@ import {isString} from "lodash-es";
 import type {AxiosOptons, AxiosTransform} from "./axiosTransform";
 import {HttpClient} from "./httpClient";
 import {ContentType, RequestMethod} from "/@/enums/http";
+import {useMessage} from "/@/hooks/web/useMessage";
+
+const {message: createMessage, createSuccessModal} = useMessage()
 
 const transform: AxiosTransform = {
   /*
@@ -12,6 +15,7 @@ const transform: AxiosTransform = {
     if (urlPrefix && isString(urlPrefix)) {
       config.url = `${urlPrefix}${config.url}`
     }
+
     if (apiUrl && isString(apiUrl)) {
       config.url = `${apiUrl}${config.url}`
     }
@@ -25,9 +29,41 @@ const transform: AxiosTransform = {
   },
 
   transformResponseHook: (res, options) => {
-    console.log('transform response');
-    console.log(res);
-    console.log(options);
+    const {isTransformResponse, isReturnNativeResponse} = options
+    /*
+    * 返回原生的res
+    */
+    if (isReturnNativeResponse) {
+      console.log(res);
+      return res
+    }
+    /*
+    * 对返回的数据进行处理
+    */
+    if (!isTransformResponse) {
+      return res.data
+    }
+    const {data} = res
+    if (!data) {
+      throw new Error('请求无数据返回')
+    }
+    const {code, message, data: result} = data
+
+    const success = data && Reflect.has(data, 'code') && code === 0
+    if (success) {
+      const successMsg = message || '操作成功'
+      if (options.successMsgMode === 'message') {
+        createMessage.success(successMsg)
+      }
+      if (options.successMsgMode === 'modal') {
+        createSuccessModal({
+          title: '成功提示',
+          content: successMsg
+        })
+      }
+      return result
+    }
+
   },
   /*
   * 请求之前的拦截器
@@ -57,6 +93,7 @@ function createHttp() {
       apiUrl: import.meta.env.VITE_GLOB_API_URL,
       urlPrefix: import.meta.env.VITE_GLOB_API_URL_PREFIX,
       withToken: true,
+      isTransformResponse: true,
     }
   })
 }

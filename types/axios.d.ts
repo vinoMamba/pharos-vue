@@ -6,6 +6,7 @@ export interface RequestOptions {
   joinTime?: boolean
   urlPrefix?: string
   apiUrl?: string
+  successMsgMode?: 'message' | 'modal' | 'none'
 }
 
 export interface Result<T = any> {

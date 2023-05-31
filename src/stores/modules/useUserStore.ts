@@ -3,9 +3,6 @@ import {ref} from "vue";
 import {dingtalkLogin} from "/@/api/login";
 import type {User} from "/#/types";
 import {router} from "/@/router";
-import {asyncRoutes, getAsyncRoutes} from "/@/router/routes";
-import type {Route} from "ant-design-vue/lib/breadcrumb/Breadcrumb";
-import type {RouteRecordRaw} from "vue-router";
 
 export const useUserInfoStore = defineStore('userInfo', () => {
   const corpId = ref('')
@@ -16,8 +13,13 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     corpId.value = newId
   }
 
+  const getUserInfo = (): User => {
+    return userInfo.value || JSON.parse(window.localStorage.getItem('userInfo') || '{}')
+  }
+
   const setUserInfo = (newUserInfo: User) => {
     userInfo.value = newUserInfo
+    window.localStorage.setItem('userInfo', JSON.stringify(newUserInfo))
   }
 
   const setToken = (newToken: string) => {
@@ -45,5 +47,6 @@ export const useUserInfoStore = defineStore('userInfo', () => {
     corpId,
     setCorpId,
     setupLogin,
+    getUserInfo
   }
 })

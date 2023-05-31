@@ -7,5 +7,9 @@ export const dingtalkLogin = (authCode: string) => {
     data: {
       authCode
     }
-  })
+  },
+    {
+      withToken: false,
+    }
+  )
 }

@@ -69,8 +69,8 @@ const transform: AxiosTransform = {
   * 请求之前的拦截器
   */
   requestInterceptors: (config, options) => {
-    //TODO: getToken()
-    const token = 'token'
+    //TODO: getToken() 这里需要封装好缓存方案,过期方案，目前先用localStorage
+    const token = localStorage.getItem('token') || ''
     if (token && (config as AxiosOptons).requestOptions?.withToken !== false) {
       config.headers.Authorization = `${options.authenticationScheme} ${token}`
     }

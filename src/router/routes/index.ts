@@ -16,22 +16,22 @@ export const LoginRoute: AppRouteRecordRaw = {
   component: () => import("/@/views/sys/login/loginPage.tsx").then(res => res.LoginPage),
 }
 
-const routerModuleList: AppRouteRecordRaw[] = []
 
-const modules = import.meta.glob("./modules/**/*ts")
-const keys = Object.keys(modules)
-keys.forEach(async key => {
-  const module = await (modules[key]() as Promise<{default: AppRouteRecordRaw}>)
-  const mod = module.default
-  const modList = Array.isArray(mod) ? [...mod] : [mod]
-  routerModuleList.push(...modList)
-})
-
-export const asyncRoutes = [...routerModuleList]
-
+export const getAsyncRoutes = async () => {
+  const modules = import.meta.glob("./modules/**/*.ts")
+  const keys = Object.keys(modules)
+  const routerModuleList = keys.map(async key => {
+    const module = await (modules[key]() as Promise<{default: AppRouteRecordRaw}>)
+    const mod = module.default
+    const modList = Array.isArray(mod) ? [...mod] : [mod]
+    return modList
+  })
+  const asyncRoutes = (await Promise.all(routerModuleList))
+  return asyncRoutes.flat() as AppRouteRecordRaw[]
+}
 
 export const basicRoutes = [
   RootRoute,
-  LoginRoute
+  LoginRoute,
 ]
 

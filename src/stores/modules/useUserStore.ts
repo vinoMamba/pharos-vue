@@ -2,6 +2,10 @@ import {defineStore} from "pinia";
 import {ref} from "vue";
 import {dingtalkLogin} from "/@/api/login";
 import type {User} from "/#/types";
+import {router} from "/@/router";
+import {asyncRoutes, getAsyncRoutes} from "/@/router/routes";
+import type {Route} from "ant-design-vue/lib/breadcrumb/Breadcrumb";
+import type {RouteRecordRaw} from "vue-router";
 
 export const useUserInfoStore = defineStore('userInfo', () => {
   const corpId = ref('')
@@ -28,6 +32,16 @@ export const useUserInfoStore = defineStore('userInfo', () => {
       const {tokenInfo} = data
       setToken(tokenInfo.tokenValue)
       setUserInfo(data.userInfo)
+
+      /*
+      * 处理路由,后期加入权限管理
+      */
+      const routes = await getAsyncRoutes()
+      routes.forEach((route) => {
+        router.addRoute(route as unknown as RouteRecordRaw)
+      })
+
+      await router.replace('/home')
       return Promise.resolve(userInfo.value)
     } catch (error) {
       return Promise.reject(error)

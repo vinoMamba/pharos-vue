@@ -33,14 +33,6 @@ export const useUserInfoStore = defineStore('userInfo', () => {
       setToken(tokenInfo.tokenValue)
       setUserInfo(data.userInfo)
 
-      /*
-      * 处理路由,后期加入权限管理
-      */
-      const routes = await getAsyncRoutes()
-      routes.forEach((route) => {
-        router.addRoute(route as unknown as RouteRecordRaw)
-      })
-
       await router.replace('/home')
       return Promise.resolve(userInfo.value)
     } catch (error) {

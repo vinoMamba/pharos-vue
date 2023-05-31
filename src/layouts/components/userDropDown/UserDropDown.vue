@@ -7,9 +7,9 @@ const userInfo = userStore.getUserInfo();
 </script>
 <template>
   <Dropdown>
-    <span>
+    <span class="flex items-center">
       <Avatar :size="32" />
-      <span>{{ userInfo.name }}</span>
+      <span class="text-red">{{ userInfo.name }}</span>
     </span>
     <template #overlay>
       <span>菜单1</span>

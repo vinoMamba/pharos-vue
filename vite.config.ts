@@ -8,6 +8,7 @@ import {loadEnv} from 'vite'
 import {htmlPlugin} from './plugins/html'
 import {wrapperEnv} from './plugins/wrapperEnv'
 import {createProxy} from './plugins/proxy'
+import UnoCSS from 'unocss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig((configEnv: ConfigEnv) => {
@@ -20,7 +21,12 @@ export default defineConfig((configEnv: ConfigEnv) => {
       host: true,
       proxy: createProxy(wrapEnv.VITE_PROXY),
     },
-    plugins: [vue(), vueJsx(), htmlPlugin(wrapEnv)],
+    plugins: [
+      vue(),
+      vueJsx(),
+      htmlPlugin(wrapEnv),
+      UnoCSS()
+    ],
     resolve: {
       alias: [
         {

@@ -8,7 +8,7 @@ export const TriggleButton = defineComponent({
     const {collapsed, toggleCollapsed} = useMenuSetting()
 
     return () => (
-      <div onClick={toggleCollapsed}>
+      <div onClick={toggleCollapsed} class="px-10 h-full flex items-center">
         {collapsed.value
           ? <MenuUnfoldOutlined />
           : <MenuFoldOutlined />

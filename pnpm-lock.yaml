@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@ant-design/icons-vue':
+    specifier: ^6.1.0
+    version: 6.1.0(vue@3.3.2)
   ant-design-vue:
     specifier: 3.2.20
     version: 3.2.20(vue@3.3.2)
@@ -91,7 +94,7 @@ devDependencies:
     specifier: 5.0.4
     version: 5.0.4
   unocss:
-    specifier: ^0.52.5
+    specifier: 0.52.5
     version: 0.52.5(postcss@8.4.23)(vite@4.3.5)
   vite:
     specifier: 4.3.5

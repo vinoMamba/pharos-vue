@@ -6,13 +6,11 @@ const userStore = useUserInfoStore();
 const userInfo = userStore.getUserInfo();
 </script>
 <template>
-  <Dropdown>
-    <span class="flex items-center">
-      <Avatar :size="32" />
-      <span class="text-red">{{ userInfo.name }}</span>
+  <Dropdown placement="bottomLeft">
+    <span flex items-center cursor-pointer>
+      <Avatar :size="32" :src="userInfo.avatar || ''" />
+      <span ml-8>{{ userInfo.name }}</span>
     </span>
-    <template #overlay>
-      <span>菜单1</span>
-    </template>
+    <!-- TODO: 下拉菜单 -->
   </Dropdown>
 </template>

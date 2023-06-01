@@ -3,6 +3,8 @@ import {ref} from "vue";
 import {dingtalkLogin} from "/@/api/login";
 import type {User} from "/#/types";
 import {router} from "/@/router";
+import {usePermissionStore} from "./usePermission";
+import type {RouteRecordRaw} from "vue-router";
 
 export const useUserInfoStore = defineStore('userInfo', () => {
   const corpId = ref('')
@@ -35,12 +37,22 @@ export const useUserInfoStore = defineStore('userInfo', () => {
       setToken(tokenInfo.tokenValue)
       setUserInfo(data.userInfo)
 
-      await router.replace('/home')
-      return Promise.resolve(userInfo.value)
+      return afterLoginAction()
+
     } catch (error) {
       return Promise.reject(error)
     }
 
+  }
+
+  const afterLoginAction = async () => {
+    const permssionStore = usePermissionStore()
+    const routes = await permssionStore.buildRouteAction()
+    routes.forEach((route) => {
+      router.addRoute(route as unknown as RouteRecordRaw)
+    })
+    await router.replace('/home')
+    return Promise.resolve(userInfo.value)
   }
 
   return {

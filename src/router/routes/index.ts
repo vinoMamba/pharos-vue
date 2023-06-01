@@ -1,5 +1,6 @@
 import {isArray} from "lodash-es";
 import type {AppRouteRecordRaw} from "../types";
+import {PAGE_NOT_FOUND_NAME, LAYOUT, EXCEPTION_COMPONENT} from "../constant";
 
 
 export const RootRoute: AppRouteRecordRaw = {
@@ -17,6 +18,20 @@ export const LoginRoute: AppRouteRecordRaw = {
   component: () => import("/@/views/sys/login/loginPage.tsx").then(res => res.LoginPage),
 }
 
+export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
+  path: "/:path(.*)*",
+  name: PAGE_NOT_FOUND_NAME,
+  component: LAYOUT,
+  meta: {},
+  children: [
+    {
+      path: "/:path(.*)*",
+      name: PAGE_NOT_FOUND_NAME,
+      component: EXCEPTION_COMPONENT,
+    }
+  ]
+}
+
 const routeModuleList: AppRouteRecordRaw[] = []
 /*
 * 通过 import.meta.glob 方法来加载 modules 下面的所有 ts 文件
@@ -29,9 +44,10 @@ keys.forEach(key => {
   routeModuleList.push(...modList)
 })
 
+export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList]
+
 export const basicRoutes = [
   RootRoute,
   LoginRoute,
-  ...routeModuleList,
 ]
 

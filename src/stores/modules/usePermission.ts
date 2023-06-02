@@ -1,20 +1,20 @@
 import {defineStore} from "pinia";
 import {ref} from "vue";
-import type {AppRouteRecordRaw, Menu} from "/@/router/types";
+import type {AppRouteRecordRaw, MenuItem} from "/@/router/types";
 import {useAppStore} from "./useAppStore";
 import {PermissionModeEnum} from "/@/enums/config";
 import {asyncRoutes} from "/@/router/routes";
 
 export const usePermissionStore = defineStore('permission', () => {
   const isDynamicAddRoute = ref(false)
-  const backMenuList = ref<Menu[]>([])
-  const frontMenuList = ref<Menu[]>([])
+  const backMenuList = ref<MenuItem[]>([])
+  const frontMenuList = ref<MenuItem[]>([])
 
-  const getFrontMenuList = (): Menu[] => {
+  const getFrontMenuList = (): MenuItem[] => {
     return frontMenuList.value
   }
 
-  const getBackMenuList = (): Menu[] => {
+  const getBackMenuList = (): MenuItem[] => {
     return backMenuList.value
   }
 
@@ -22,7 +22,7 @@ export const usePermissionStore = defineStore('permission', () => {
     return isDynamicAddRoute.value
   }
 
-  const setFrontMenuList = (menuList: Menu[]): void => {
+  const setFrontMenuList = (menuList: MenuItem[]): void => {
     frontMenuList.value = menuList
   }
 

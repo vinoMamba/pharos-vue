@@ -11,13 +11,13 @@ export interface MenuTag {
   dot?: boolean
 }
 
-export interface Menu {
+export interface MenuItem {
   name: string
   icon?: string
   path: string
   paramPath?: string
   disabled?: boolean
-  children?: Menu[]
+  children?: MenuItem[]
   orderNo?: number
   roles?: string[]
   meta?: Partial<RouteMeta>

@@ -6,14 +6,18 @@ import {PAGE_NOT_FOUND_NAME, LAYOUT, EXCEPTION_COMPONENT} from "../constant";
 export const RootRoute: AppRouteRecordRaw = {
   path: "/",
   name: "Root",
-  meta: {},
+  meta: {
+    title: "Root",
+  },
   redirect: "/login",
 }
 
 export const LoginRoute: AppRouteRecordRaw = {
   path: "/login",
   name: "Login",
-  meta: {},
+  meta: {
+    title: "登录",
+  },
   // vue 里面加载 .tsx 文件的时候需要加上 .then(res => res.xxx) 这样的写法
   component: () => import("/@/views/sys/login/loginPage.tsx").then(res => res.LoginPage),
 }
@@ -22,12 +26,17 @@ export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
   path: "/:path(.*)*",
   name: PAGE_NOT_FOUND_NAME,
   component: LAYOUT,
-  meta: {},
+  meta: {
+    title: "ErrorPage",
+  },
   children: [
     {
       path: "/:path(.*)*",
       name: PAGE_NOT_FOUND_NAME,
       component: EXCEPTION_COMPONENT,
+      meta: {
+        title: "ErrorPage",
+      }
     }
   ]
 }
@@ -49,5 +58,6 @@ export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList]
 export const basicRoutes = [
   RootRoute,
   LoginRoute,
+  PAGE_NOT_FOUND_ROUTE
 ]
 

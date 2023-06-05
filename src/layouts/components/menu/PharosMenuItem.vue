@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import {Menu} from "ant-design-vue"
-import PharosMenuItemConent from "./PharosMenuItemConent.vue";
-import type {PropType} from "vue";
 import type {MenuItem} from "/@/router/types";
+import type {PropType} from "vue";
 
 defineProps({
   item: {
@@ -15,6 +14,9 @@ defineProps({
 </script>
 <template>
   <Menu.Item :key="item.path">
-    <PharosMenuItemConent :item="item" />
+    <template #icon>
+      <div :class="item.icon"></div>
+    </template>
+    <span>{{ item.name }}</span>
   </Menu.Item>
 </template>

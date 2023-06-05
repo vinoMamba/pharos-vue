@@ -28,6 +28,7 @@ export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
   component: LAYOUT,
   meta: {
     title: "ErrorPage",
+    hideMenu: true,
   },
   children: [
     {
@@ -36,6 +37,7 @@ export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
       component: EXCEPTION_COMPONENT,
       meta: {
         title: "ErrorPage",
+        hideMenu: true,
       }
     }
   ]

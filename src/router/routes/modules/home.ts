@@ -6,6 +6,7 @@ export const home: AppRouteRecordRaw = {
   name: "home",
   meta: {
     title: "首页",
+    hideChildrenInMenu: true
   },
   component: LAYOUT,
   redirect: "/home/index",

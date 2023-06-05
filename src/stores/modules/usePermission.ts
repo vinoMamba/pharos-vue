@@ -4,6 +4,7 @@ import type {AppRouteRecordRaw, MenuItem} from "/@/router/types";
 import {useAppStore} from "./useAppStore";
 import {PermissionModeEnum} from "/@/enums/config";
 import {asyncRoutes} from "/@/router/routes";
+import {transformRouteToMenu} from "/@/router/menu";
 
 export const usePermissionStore = defineStore('permission', () => {
   const isDynamicAddRoute = ref(false)
@@ -30,6 +31,12 @@ export const usePermissionStore = defineStore('permission', () => {
     isDynamicAddRoute.value = dynamicAddRoute
   }
 
+  const setMenuFromRoutes = () => {
+    const menuList = transformRouteToMenu(asyncRoutes)
+    menuList.sort((a, b) => (a.meta?.orderNo || 0) - (b.meta?.orderNo || 0))
+    setFrontMenuList(menuList)
+  }
+
   const buildRouteAction = async (): Promise<AppRouteRecordRaw[]> => {
     const appStore = useAppStore()
     const {permissionMode} = appStore.getProjectConfig()
@@ -39,7 +46,7 @@ export const usePermissionStore = defineStore('permission', () => {
       case PermissionModeEnum.BACK:
         break
       case PermissionModeEnum.FRONT:
-
+        setMenuFromRoutes()
         routes = asyncRoutes
         break
       default:

@@ -18,7 +18,7 @@ export interface MenuItem {
   *  你可以在这个网站上找到你想要的图标，然后复制它的名称到这里： https://icones.js.org/
   */
   icon?: string
-  path?: string
+  path: string
   children?: MenuItem[]
   orderNo?: number
   meta?: Partial<RouteMeta>

@@ -1,34 +1,18 @@
 <script setup lang="ts">
 import {Menu} from "ant-design-vue"
-import {ref} from "vue";
-import type {MenuItem} from "/@/router/types";
 import PharosSubMenu from "./PharosSubMenu.vue";
+import {getAsyncMenus} from "/@/router/menu";
+import type {MenuInfo} from "ant-design-vue/lib/menu/src/interface";
 
-const menuList = ref<MenuItem[]>([
-  {
-    name: "Dashboard",
-    path: "dashboard",
-    icon: "i-mdi:view-dashboard",
-    children: [
-      {
-        name: "分析页",
-        path: "analysis",
-      },
-      {
-        name: "监控页",
-        path: "monitor",
-      },
-      {
-        name: "工作台",
-        path: "workplace",
-      },
-    ],
-  }
-])
+const menuList = getAsyncMenus();
+
+const handleMenuClick = (menuInfo: MenuInfo) => {
+  console.log(menuInfo.key);
+}
 
 </script>
 <template>
-  <Menu theme="dark" mode="inline">
+  <Menu theme="dark" mode="inline" @click="handleMenuClick">
     <template v-for="item in menuList" :key="item.path">
       <PharosSubMenu :item="item" />
     </template>

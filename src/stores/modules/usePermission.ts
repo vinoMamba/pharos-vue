@@ -39,6 +39,7 @@ export const usePermissionStore = defineStore('permission', () => {
       case PermissionModeEnum.BACK:
         break
       case PermissionModeEnum.FRONT:
+
         routes = asyncRoutes
         break
       default:

@@ -4,14 +4,18 @@ import type {AppRouteRecordRaw} from "../../types";
 export const home: AppRouteRecordRaw = {
   path: "/home",
   name: "home",
-  meta: {},
+  meta: {
+    title: "首页",
+  },
   component: LAYOUT,
   redirect: "/home/index",
   children: [
     {
       path: "index",
       name: "homeIndex",
-      meta: {},
+      meta: {
+        title: "首页",
+      },
       component: () => import("/@/views/basic/home/HomePage.vue")
     }
   ]

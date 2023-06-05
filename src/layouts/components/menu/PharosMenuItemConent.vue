@@ -11,7 +11,8 @@ defineProps({
 })
 </script>
 <template>
-  <div>
-    {{ item.name }}
+  <div flex items-center justify-start>
+    <div :class="item.icon"></div>
+    <span ml-8>{{ item.name }}</span>
   </div>
 </template>

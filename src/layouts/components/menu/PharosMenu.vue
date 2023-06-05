@@ -8,6 +8,7 @@ const menuList = ref<MenuItem[]>([
   {
     name: "Dashboard",
     path: "dashboard",
+    icon: "i-mdi:view-dashboard",
     children: [
       {
         name: "分析页",

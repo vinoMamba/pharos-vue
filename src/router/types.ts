@@ -13,6 +13,10 @@ export interface MenuTag {
 
 export interface MenuItem {
   name: string
+  /*
+  *  use unocss-icons. see: https://unocss.dev/presets/icons#icon-customizations
+  *  你可以在这个网站上找到你想要的图标，然后复制它的名称到这里： https://icones.js.org/
+  */
   icon?: string
   path: string
   paramPath?: string

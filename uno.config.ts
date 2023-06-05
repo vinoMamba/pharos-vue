@@ -5,6 +5,11 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetAttributify(),
-    presetIcons(),
+    presetIcons({
+      scale: 1.2,
+      collections: {
+        mdi: () => import('@iconify-json/mdi/icons.json').then((i) => i.default)
+      }
+    }),
   ]
 })

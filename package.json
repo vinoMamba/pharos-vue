@@ -27,6 +27,7 @@
   "devDependencies": {
     "@commitlint/cli": "17.6.3",
     "@commitlint/config-conventional": "17.6.3",
+    "@iconify-json/mdi": "^1.1.52",
     "@playwright/test": "1.33.0",
     "@rushstack/eslint-patch": "1.2.0",
     "@tsconfig/node18": "2.0.1",
